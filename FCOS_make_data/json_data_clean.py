@@ -21,7 +21,7 @@ def get_file_list(root_path, postfix=None):
 
 
 if __name__ == '__main__':
-    root_dir = r'E:\dataset\ZhongChe_data\sdg_huohua_detect\0705\yiwu_ruqin\ps\visualize_json'
+    root_dir = r'E:\dataset\DiTie_data\hand\check_0706\merge\visualize_json'
     dirs = os.listdir(root_dir)
     dirs = [os.path.join(root_dir, dir) for dir in dirs]
     dirs = [dir for dir in dirs if os.path.isdir(dir) and 'ori' not in dir]

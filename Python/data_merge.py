@@ -31,8 +31,8 @@ def CopyFile(filepath, newPath):
 
 
 if __name__ == "__main__":
-    path = r"E:\dataset\ZhongChe_data\sdg\0330\check/"
+    path = r"E:\dataset\DiTie_data\hand\check_0706/"
     # 创建目标文件夹
-    mkPath = r'E:\dataset\ZhongChe_data\sdg\0330\check\result_merge/'
+    mkPath = r'E:\dataset\DiTie_data\hand\check_0706\result_merge/'
     CreateDir(mkPath)
     CopyFile(path, mkPath)

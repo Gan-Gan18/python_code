@@ -115,6 +115,5 @@ if __name__ == "__main__":
     save_path = r"E:\dataset\jinku_data\tielong\0701\label\Segmentation_result"
     if not os.path.exists(save_path):
         os.makedirs(save_path)
-
     convert_to_seg()
     convert_mode()

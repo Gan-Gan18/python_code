@@ -29,7 +29,7 @@ for root, dirs, files in os.walk(videos_path):
 
         videos_full_path = os.path.join(root, file_name)
         cap = cv2.VideoCapture(videos_full_path)
-        print('\n开始处理第 ', str(i), ' 个视频：' + file_name)
+        print('\nStart processing：' + file_name)
 
         # 以指定帧数抽取图片并保存
         frame_count = 0
@@ -44,4 +44,4 @@ for root, dirs, files in os.walk(videos_path):
                 name = img_full_path + "0705_%d_%06d.jpg" % (i, frame_count)
                 # name = img_full_path + file_name.split('.')[0] + "_%06d.jpg" % frame_count
                 cv2.imwrite(name, frame)
-print('\n一共 ', str(file_count), ' 个视频,', '已全部处理完毕！')
+print('\nAll the videos have been processed！！')
