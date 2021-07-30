@@ -123,7 +123,7 @@ class LabelmeJsonParser(object):
 
 
 def main():
-    labeled_root = r'E:\dataset\DiTie_data\hand\check_0706\merge'
+    labeled_root = r'E:\dataset\DiTie_data\people\people_01\1218\check\1201_10_1'
     # image_file_list = get_file_list(labeled_root, '.jpg')
     json_file_list = get_file_list(labeled_root, '.json')
 

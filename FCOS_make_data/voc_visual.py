@@ -4,9 +4,9 @@ try:
     import xml.etree.cElementTree as ET
 except ImportError:
     import xml.etree.ElementTree as ET
-root_xml = r"E:\dataset\jcp_data\hat_clothes\VOC2007_0518\Annotations/"
-rootDir = r"E:\dataset\jcp_data\hat_clothes\VOC2007_0518\JPEGImages/"
-save_folder=r"E:\dataset\jcp_data\hat_clothes\VOC2007_0518/result/"
+root_xml = r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu\Annotations/"
+rootDir = r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu\JPEGImages/"
+save_folder=r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu/result/"
 if not os.path.exists(save_folder):
     os.makedirs(save_folder)
 error = []
@@ -26,12 +26,13 @@ error = []
 # label_name = {"1":(0,255,0)}
 # label_name = {"open":(0,255,0),"close":(255,0,0)}
 # label_name = {"clothes":(0,0,255),"rope":(255,0,0)}
-label_name = {"head0":(0,0,0),"head1":(255,0,0),"head2":(0,255,255),"clothes0":(0,0,0),"clothes1":(255,0,0),"clothes2":(0,255,255)}
+# label_name = {"head0":(0,0,0),"head1":(255,0,0),"head2":(0,255,255),"clothes0":(0,0,0),"clothes1":(255,0,0),"clothes2":(0,255,255)}
 #moneybag
 # label_name = {"1":(255,255,255),"2":(255,0,0),"3":(0,0,255),"4":(0,255,255)}
 # label_name = {"moneybag":(255,255,255),"box":(255,0,0)}
 # label_name = {"luggage":(0,0,0),"pack":(0,0,255),"head2":(0,100,98),"clothes0":(255,0,0),"clothes1":(255,255,255),"clothes2":(0,0,0)}
 # label_name = {"arm":(0,255,0)}
+label_name = {"3":(0,255,0)}
 def parse_xml(xml_file):
     tree = ET.parse(root_xml + xml_file)  # <class 'xml.etree.ElementTree.ElementTree'>
     root = tree.getroot()

@@ -2,7 +2,7 @@
 import os
 import cv2
 
-parantFold='Z:/dataset/rmbProject/coin/colorsegment/20200518/aligned/'
+parantFold=r'C:\Users\1\Desktop\4Gain/'
 imageFold=parantFold+'img/'
 imageSaveFold=parantFold+'imgResize/'
 

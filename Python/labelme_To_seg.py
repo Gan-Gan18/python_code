@@ -16,7 +16,16 @@ def get_label_name_id():
     获取每个标签名对应的id,包括_background_
     id从0开始
     """
-    json_label_name = ['_background_', 'tl']  # 根据labelme标注的标签名修改
+
+    """
+    根据labelme标注的标签名修改
+    """
+    json_label_name = ['_background_', 'tl']  #金库铁笼
+    # json_label_name =['_background_', 'sdg']  #受电弓倾斜
+    # json_label_name = ['_background_', 'break']
+    # json_label_name =['_background_', 'deformation']
+    # json_label_name = ['_background_', 'missing']
+    # json_label_name = ['_background_', 'normal']
     name_id = {}
     for name in json_label_name:
         ids = json_label_name.index(name)
@@ -29,7 +38,6 @@ def label_colormap(n_label=256, value=None):
     定义每种标签类别的颜色值：rgb通道
     按照标签名和id顺序依次设定
     """
-
     def bitget(byteval, idx):
         return (byteval & (1 << idx)) != 0
 
@@ -48,10 +56,11 @@ def label_colormap(n_label=256, value=None):
 
     cmap[0, :] = [128, 128, 128]  # _background_
     cmap[1, :] = [214, 0, 0]  # json_label_name  金库铁笼
-    # cmap[2, :] = []
-    # cmap[3, :] = []
-    # cmap[4, :] = []
-    # ...
+    # cmap[1, :] = [0, 0, 142]
+    # cmap[1, :] = [0,136,0]
+    # cmap[1, :] = [255,170,0]
+    # cmap[1, :] = []
+
 
     if value is not None:
         hsv = color_module.rgb2hsv(cmap.reshape(1, -1, 3))
@@ -107,12 +116,12 @@ def convert_mode():
         img = PIL.Image.open(file_name)
         img = img.convert('RGB')
         img.save(file_name)
-        print('convert mode to "RGB"')
+    print('convert mode to "RGB"!')
 
 
 if __name__ == "__main__":
-    root_path = r"E:\dataset\jinku_data\tielong\0701\label"
-    save_path = r"E:\dataset\jinku_data\tielong\0701\label\Segmentation_result"
+    root_path = r"E:\dataset\jinku_data\tielong\0730\label"
+    save_path = root_path + "\Segmentation_result"
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     convert_to_seg()
