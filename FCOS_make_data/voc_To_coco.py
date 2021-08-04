@@ -151,14 +151,18 @@ if __name__ == '__main__':
     coco_path = r"E:\dataset\jcp_data\rope_clothes\coco/"
 
     # 自动创建对应文件夹
-    if not os.path.exists(os.path.join(coco_path + 'train2014/annotations_0730')):
-        os.makedirs(coco_path + 'train2014/annotations_0730/')
-    if not os.path.exists(os.path.join(coco_path + 'train2014/images_0730/')):
-        os.makedirs(coco_path + 'train2014/images_0730/')
-    if not os.path.exists(os.path.join(coco_path + 'val2014/annotations_0730/')):
-        os.makedirs(coco_path + r'val2014/annotations_0730/')
-    if not os.path.exists(os.path.join(coco_path + 'val2014/images_0730/')):
-        os.makedirs(coco_path + 'val2014/images_0730/')
+    train_ann = coco_path + 'train2014/annotations_0730/'
+    train_img = coco_path + 'train2014/images_0730/'
+    val_ann = coco_path + 'val2014/annotations_0730/'
+    val_img = coco_path + 'val2014/images_0730/'
+    if not os.path.exists(train_ann):
+        os.makedirs(train_ann)
+    if not os.path.exists(train_img):
+        os.makedirs(train_img)
+    if not os.path.exists(val_ann):
+        os.makedirs(val_ann)
+    if not os.path.exists(val_img):
+        os.makedirs(val_img)
 
     # 获取xml文件列表
     xml_dir = os.path.join(root_path, 'Annotations')
@@ -168,18 +172,18 @@ if __name__ == '__main__':
 
     # 划分train data训练集
     xml_list = xml_labels[split_point:]
-    json_file = os.path.join(coco_path, 'train2014/annotations_0730/instances_train2014.json')
+    json_file = os.path.join(train_ann, 'instances_train2014.json')
     convert(xml_list, xml_dir, json_file)
     for xml_file in xml_list:
         img_name = xml_file[:-4] + '.jpg'
         shutil.copy(os.path.join(root_path, 'JPEGImages', img_name),
-                    os.path.join(coco_path, 'train2014/images_0730', img_name))
+                    os.path.join(train_img, img_name))
 
     # 划分validation data验证集
     xml_list = xml_labels[0:split_point]
-    json_file = os.path.join(coco_path, 'val2014/annotations_0730/instances_val2014.json')
+    json_file = os.path.join(val_ann, 'instances_val2014.json')
     convert(xml_list, xml_dir, json_file)
     for xml_file in xml_list:
         img_name = xml_file[:-4] + '.jpg'
         shutil.copy(os.path.join(root_path, 'JPEGImages', img_name),
-                    os.path.join(coco_path, 'val2014/images_0730', img_name))
+                    os.path.join(val_img, img_name))

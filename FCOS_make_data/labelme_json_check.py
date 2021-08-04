@@ -3,37 +3,22 @@
 '''
     Labelme标注生成的json文件可视化
 
-    1.当前仅支持bounding box的可视化
+    当前仅支持bounding box的可视化
 '''
 
 import os
 import json
 import cv2
 import shutil
+import glob
 
 COLORS = [(0, 255, 0), (0, 0, 255), (255, 0, 0), (0, 255, 255), (255, 255, 255)]
 
 
-def get_file_list(root_path, postfix=None):
-    '''
-    获取root_path目录下的所有后缀名为postfix的文件
-    '''
-    file_list = []
-    for root, dirs, files in os.walk(root_path):
-        for file in files:
-            filename = os.path.join(root, file)
-            file_list.append(filename)
-
-    if postfix:
-        file_list = list(filter(lambda filename: filename.endswith(postfix), file_list))
-
-    return file_list
-
-
 def make_if_not_exit(dir):
-    '''
+    """
     创建文件目录[若目录不存在]
-    '''
+    """
     if not os.path.exists(dir):
         os.makedirs(dir)
 
@@ -90,7 +75,6 @@ class LabelmeJsonParser(object):
         shape_type = shape['shape_type']
         if shape_type == 'rectangle':
             p1, p2 = get_points(shape['points'])
-            # cv2.rectangle(image, p1, p2, COLORS[int(shape['label'])%len(COLORS)], 3)
             cv2.rectangle(image, p1, p2, COLORS[0], 2)
         return image
 
@@ -113,8 +97,6 @@ class LabelmeJsonParser(object):
                     save_name = os.path.join(save_path, os.path.basename(self.image_filename))
                     cv2.imwrite(save_name, image)
                 else:
-                    # cv2.putText(image, "label: {}, shape_type: {}".format(label, shape_type), (100, 100),
-                    #             cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255), 2)
                     cv2.putText(image, "label: {}".format(label), (100, 100), cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                                 (0, 0, 255), 2)
                     cv2.imshow(self.image_filename, image)
@@ -122,18 +104,14 @@ class LabelmeJsonParser(object):
                     cv2.destroyAllWindows()
 
 
-def main():
-    labeled_root = r'E:\dataset\DiTie_data\people\people_01\1218\check\1201_10_1'
-    # image_file_list = get_file_list(labeled_root, '.jpg')
-    json_file_list = get_file_list(labeled_root, '.json')
-
-    for json_file in json_file_list:
+if __name__ == '__main__':
+    labeled_root = r'E:\dataset\jcp_data\hat_clothes\0119\0120_1'
+    file_list = []
+    for file in glob.glob(os.path.join(labeled_root, "*.json")):
+        file_list.append(file)
+    for json_file in file_list:
         image_file = json_file.split('.')[0] + '.jpg'
         if not os.path.exists(image_file):
             continue
         parser = LabelmeJsonParser(json_file, image_file, save_images=True)
         parser.visualize()
-
-
-if __name__ == '__main__':
-    main()

@@ -32,7 +32,7 @@ img_name_prex ="0324000"
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 # 金库
-# size = [1280,720]
+size = [1280,720]
 # 检测棚
 # size = [704,576]
 
