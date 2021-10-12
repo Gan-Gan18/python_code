@@ -74,6 +74,7 @@ class LabelmeJsonParser(object):
 
         shape_type = shape['shape_type']
         if shape_type == 'rectangle':
+        # if shape_type == 'polygon':
             p1, p2 = get_points(shape['points'])
             cv2.rectangle(image, p1, p2, COLORS[0], 2)
         return image
@@ -105,7 +106,7 @@ class LabelmeJsonParser(object):
 
 
 if __name__ == '__main__':
-    labeled_root = r'E:\dataset\jcp_data\hat_clothes\0119\0120_1'
+    labeled_root = r'E:\dataset\jcp_data\switch\20211012\images\check\2'
     file_list = []
     for file in glob.glob(os.path.join(labeled_root, "*.json")):
         file_list.append(file)

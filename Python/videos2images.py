@@ -73,12 +73,12 @@ def video_to_images(video_file, image_save_path=None, prefix_name=None, interval
 
 
 if __name__ == '__main__':
-    video_path = r'E:\dataset\jinku_data\0322'
+    video_path = r'E:\dataset\jcp_data\rope_clothes\20211009\videos'
     files = get_file_list(video_path)
-    video_files = files_filter(files, ['mp4', 'MP4'])
+    video_files = files_filter(files, ['mp4', 'MP4', 'mkv'])
     print(video_files)
     for i in tqdm(range(len(video_files))):
-        video_to_images(video_files[i], interval=20)
+        video_to_images(video_files[i], interval=1)
 
     # video_file = r'D:\data\sdg\foreign\20200919_03_08_1033_D56_tmp.MP4'
     # video_to_images(video_file, interval=200)

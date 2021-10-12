@@ -20,7 +20,7 @@ def get_label_name_id():
     """
     根据labelme标注的标签名修改
     """
-    json_label_name = ['_background_', 'tl']  #金库铁笼
+    json_label_name = ['_background_', 'tl']  # 金库铁笼
     # json_label_name =['_background_', 'sdg']  #受电弓倾斜
     # json_label_name = ['_background_', 'break']
     # json_label_name =['_background_', 'deformation']
@@ -38,6 +38,7 @@ def label_colormap(n_label=256, value=None):
     定义每种标签类别的颜色值：rgb通道
     按照标签名和id顺序依次设定
     """
+
     def bitget(byteval, idx):
         return (byteval & (1 << idx)) != 0
 
@@ -60,7 +61,6 @@ def label_colormap(n_label=256, value=None):
     # cmap[1, :] = [0,136,0]
     # cmap[1, :] = [255,170,0]
     # cmap[1, :] = []
-
 
     if value is not None:
         hsv = color_module.rgb2hsv(cmap.reshape(1, -1, 3))
@@ -120,8 +120,8 @@ def convert_mode():
 
 
 if __name__ == "__main__":
-    root_path = r"E:\dataset\jinku_data\tielong\0730\label"
-    save_path = root_path + "\Segmentation_result"
+    root_path = r"C:\Users\1\Desktop\label/"
+    save_path = root_path + "Segmentation_result/"
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     convert_to_seg()

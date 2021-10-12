@@ -5,7 +5,7 @@ import os
 import cv2
 
 # 视频路径和图片保存路径
-root_path = r"E:\dataset\ZhongChe_data\sdg_huohua\20210803/"
+root_path = r"E:\dataset\jcp_data\switch\20211012\videos\close/"
 videos_path = root_path + "videos"  # videos文件夹下可以包含多个子文件夹
 images_path = root_path + "images"
 if not os.path.exists(images_path):
@@ -22,11 +22,11 @@ for root, dirs, files in os.walk(videos_path):
             continue
 
         # 使用“日期+后缀”对文件夹命名
-        os.mkdir(images_path + '/' + '0803_%d' % i)
-        img_full_path = os.path.join(images_path, '0803_%d' % i) + '/'
+        # os.mkdir(images_path + '/' + '0803_%d' % i)
+        # img_full_path = os.path.join(images_path, '0803_%d' % i) + '/'
         # 使用“原视频名”对文件夹命名
-        # os.mkdir(images_path + '/' + file_name.split('.')[0])
-        # img_full_path = os.path.join(images_path, file_name.split('.')[0]) + '/'
+        os.mkdir(images_path + '/' + file_name.split('.')[0])
+        img_full_path = os.path.join(images_path, file_name.split('.')[0]) + '/'
 
         videos_full_path = os.path.join(root, file_name)
         cap = cv2.VideoCapture(videos_full_path)
@@ -38,11 +38,11 @@ for root, dirs, files in os.walk(videos_path):
         while ret:
             ret, frame = cap.read()
             frame_count += 1
-            if frame_count % 10 == 0:  # 帧数
+            if frame_count % 30 == 0:  # 帧数
                 # if frame_count < 1000:
                 #     continue
                 # frame = cv2.resize(frame, (1280, 720))  # 图片分辨率大小
-                name = img_full_path + "0803%d%02d.jpg" % (i, frame_count)
-                # name = img_full_path + file_name.split('.')[0] + "_%06d.jpg" % frame_count
+                # name = img_full_path + "0803%d%02d.jpg" % (i, frame_count)
+                name = img_full_path + file_name.split('.')[0] + "_%06d.jpg" % frame_count
                 cv2.imwrite(name, frame)
-print('\nAll the videos have been processed！！')
+print('\n******All the videos have been processed！******')
