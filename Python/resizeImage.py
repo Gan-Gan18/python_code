@@ -2,27 +2,25 @@
 import os
 import cv2
 
-parantFold=r'C:\Users\1\Desktop\4Gain/'
-imageFold=parantFold+'img/'
-imageSaveFold=parantFold+'imgResize/'
 
-if not os.path.exists(imageSaveFold):
-    os.makedirs(imageSaveFold)
-    
+"""
+按指定分辨率批量缩放图片
+"""
+rootPath = r'D:\learning_text\1020_4/'
+ori_imageFold = rootPath + 'img/'
+resize_imageFold = rootPath + 'imgResize/'
+if not os.path.exists(resize_imageFold):
+    os.makedirs(resize_imageFold)
 
-ratio=0.5
-
-
-fileList=os.listdir(imageFold)
-
+# ratio = 0.5
+fileList = os.listdir(ori_imageFold)
 for file in fileList:
-    imgFileName=imageFold+file
-#    pureName=os.path.basename(imgFileName).split('.')[0]
-    imageData=cv2.imread(imgFileName)
+    imgFileName = ori_imageFold + file
+    imageData = cv2.imread(imgFileName)
+    h, w, c = imageData.shape
 
-    h,w,c=imageData.shape
-    reH,reW=int(ratio*h),int(ratio*w)
-    imageDataResize=cv2.resize( imageData,(reH,reW) ,cv2.INTER_NEAREST )
-    
-    cv2.imwrite( imageSaveFold+file,imageDataResize )
-
+    # reH, reW = int(ratio*h), int(ratio*w)
+    reH, reW = 1024, 1024
+    imageDataResize = cv2.resize(imageData, (reH, reW), cv2.INTER_NEAREST)
+    cv2.imwrite(resize_imageFold + file, imageDataResize)
+    print(str(h) + ' ' + str(w) + '>>>>>' + str(reH) + ' ' + str(reW))

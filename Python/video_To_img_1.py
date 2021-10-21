@@ -5,7 +5,7 @@ import os
 import cv2
 
 # 视频路径和图片保存路径
-root_path = r"E:\dataset\jcp_data\switch\20211012\videos\close/"
+root_path = r"E:\dataset\jcp_data\warninglight\20211015/"
 videos_path = root_path + "videos"  # videos文件夹下可以包含多个子文件夹
 images_path = root_path + "images"
 if not os.path.exists(images_path):
@@ -38,7 +38,7 @@ for root, dirs, files in os.walk(videos_path):
         while ret:
             ret, frame = cap.read()
             frame_count += 1
-            if frame_count % 30 == 0:  # 帧数
+            if frame_count % 1 == 0:  # 帧数
                 # if frame_count < 1000:
                 #     continue
                 # frame = cv2.resize(frame, (1280, 720))  # 图片分辨率大小

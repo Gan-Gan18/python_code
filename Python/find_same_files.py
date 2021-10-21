@@ -3,8 +3,13 @@
 
 import os
 import glob
-from PIL import Image
 import shutil
+
+"""
+该脚本可以将两个或多个文件夹下的相同文件提取出来
+并存放到另一文件夹下
+包含相同后缀的相同文件名+不同后缀的相同文件名
+"""
 
 
 def get_file_list():
@@ -21,7 +26,7 @@ def save_same_file():
             if item_1[:-4] == item_2[:-19]:
                 same_file_path = os.path.join(file_path_2, item_2)
                 shutil.move(same_file_path, save_path)
-                # shutil.copy(os.path.join(file_path_1, item_1), save_path)
+
 
 if __name__ == '__main__':
     file_name_list_1 = []

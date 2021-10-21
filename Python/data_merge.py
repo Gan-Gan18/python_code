@@ -1,38 +1,42 @@
 import os
 import shutil
+from collections import Counter
 
 
-def CreateDir(path):
-    isExists = os.path.exists(path)
-    # 判断结果
-    if not isExists:
-        # 如果不存在则创建目录
-        os.makedirs(path)
-        print(path + ' 目录创建成功')
-    else:
-        # 如果目录存在则不创建，并提示目录已存在
-        print(path + ' 目录已存在')
+def merge_file(ori_path, merge_path):
+    file_list = []
+    basename_list = []
 
+    """
+    合并不重名文件
+    """
+    for dirs in os.listdir(ori_path):
+        for file in os.listdir(ori_path + dirs):
+            if file == 'same':
+                continue
+            else:
+                file_list.append(ori_path + dirs + '/' + file)
+                basename_list.append(file)
+    for file in file_list:
+        shutil.copy(file, merge_path)
 
-def CopyFile(filepath, newPath):
-    # 获取当前路径下的文件名，返回List
-    fileNames = os.listdir(filepath)
-    for file in fileNames:
-        # 将文件命加入到当前文件路径后面
-        newDir = filepath + '/' + file
-        # 如果是文件
-        if os.path.isfile(newDir):
-            print(newDir)
-            newFile = newPath + file
-            shutil.copyfile(newDir, newFile)
-        # 如果不是文件，递归这个文件夹的路径
-        else:
-            CopyFile(newDir, newPath)
+    """
+    提取重名文件
+    """
+    for root, dirs, files in os.walk(ori_path):
+        list_dict = dict(Counter(basename_list))
+        for key, value in list_dict.items():
+            if value > 1:
+                try:
+                    shutil.copy(os.path.join(root, key), same_path)
+                except (FileNotFoundError, shutil.SameFileError):
+                    pass
 
 
 if __name__ == "__main__":
-    path = r"E:\dataset\jcp_data\switch\20211012\videos\close\images/"
-    # 创建目标文件夹
-    mkPath = r'E:\dataset\jcp_data\switch\20211012\1/'
-    CreateDir(mkPath)
-    CopyFile(path, mkPath)
+    ori_path = r"D:\熊猫币挑图20211015\test\merge/"
+    merge_path = ori_path + 'merge/'
+    same_path = merge_path + 'same/'
+    if not os.path.exists(same_path):
+        os.makedirs(same_path)
+    merge_file(ori_path, merge_path)

@@ -2,7 +2,9 @@ import os
 import shutil
 import datetime
 
-
+"""
+单个文件夹下 对多个文件批量重命名
+"""
 def backup_files(src_path):
     filenames = os.listdir(src_path)
     for filename in filenames:
@@ -22,7 +24,7 @@ def batch_rename(src_path, date):
             continue
         count += 1
         change_name = date + '_%05d' % count + '.' + filename.split('.')[1]
-        change_name = 'single_segmentation_' + date + '_%05d' % count + '.' + filename.split('.')[1]
+        # change_name = 'single_segmentation_' + date + '_%05d' % count + '.' + filename.split('.')[1]
         new_name = os.path.join(src_path, change_name)
         if change_name in filenames:
             same_name.append(change_name)

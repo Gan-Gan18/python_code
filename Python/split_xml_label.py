@@ -2,8 +2,8 @@ import os
 import os.path
 import shutil
 
-fileDir_ann =r'E:\dataset\ZhongChe_data\check_0930\VOC2007\Annotations/'
-fileDir_img =  r'E:\dataset\ZhongChe_data\check_0930\VOC2007\JPEGImages/'
+fileDir_ann = r'E:\dataset\ZhongChe_data\check_0930\VOC2007\Annotations/'
+fileDir_img = r'E:\dataset\ZhongChe_data\check_0930\VOC2007\JPEGImages/'
 
 # 存放包含需要的类的图片
 saveDir_img = r'E:\dataset\ZhongChe_data\check_0930\VOC2007\VOC2007_arm\JPEGImages/'

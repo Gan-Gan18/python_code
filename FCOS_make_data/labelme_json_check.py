@@ -106,7 +106,7 @@ class LabelmeJsonParser(object):
 
 
 if __name__ == '__main__':
-    labeled_root = r'E:\dataset\jcp_data\switch\20211012\images\check\2'
+    labeled_root = r'E:\dataset\jcp_data\warninglight\20211015\images\check\20211015'
     file_list = []
     for file in glob.glob(os.path.join(labeled_root, "*.json")):
         file_list.append(file)

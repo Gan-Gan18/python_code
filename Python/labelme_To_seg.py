@@ -8,21 +8,19 @@ import sys
 import numpy as np
 import labelme
 import PIL
-
-
+import shutil
+"""
+根据labelme标注设定的标签名
+获取每个标签名对应的id,包括_background_
+id从0开始
+"""
 def get_label_name_id():
     """
-    根据labelme标注设定的标签名
-    获取每个标签名对应的id,包括_background_
-    id从0开始
+    根据labelme标注的标签名修改 添加
     """
-
-    """
-    根据labelme标注的标签名修改
-    """
-    json_label_name = ['_background_', 'tl']  # 金库铁笼
+    # json_label_name = ['_background_', 'tl']  # 金库铁笼
     # json_label_name =['_background_', 'sdg']  #受电弓倾斜
-    # json_label_name = ['_background_', 'break']
+    json_label_name = ['_background_', 'arm']
     # json_label_name =['_background_', 'deformation']
     # json_label_name = ['_background_', 'missing']
     # json_label_name = ['_background_', 'normal']
@@ -32,12 +30,11 @@ def get_label_name_id():
         name_id[name] = ids
     return name_id
 
-
+"""
+定义每种标签类别的颜色值：rgb通道
+按照标签名和id顺序依次设定
+"""
 def label_colormap(n_label=256, value=None):
-    """
-    定义每种标签类别的颜色值：rgb通道
-    按照标签名和id顺序依次设定
-    """
 
     def bitget(byteval, idx):
         return (byteval & (1 << idx)) != 0
@@ -55,12 +52,15 @@ def label_colormap(n_label=256, value=None):
         cmap[i, 1] = g
         cmap[i, 2] = b
 
+    """
+    自定义分割颜色 背景+标签 多个标签按0,1,2,3...设定
+    """
     cmap[0, :] = [128, 128, 128]  # _background_
     cmap[1, :] = [214, 0, 0]  # json_label_name  金库铁笼
-    # cmap[1, :] = [0, 0, 142]
-    # cmap[1, :] = [0,136,0]
-    # cmap[1, :] = [255,170,0]
-    # cmap[1, :] = []
+    # cmap[2, :] = [0, 0, 142]
+    # cmap[3, :] = [0,136,0]
+    # cmap[4, :] = [255,170,0]
+    # cmap[5, :] = []
 
     if value is not None:
         hsv = color_module.rgb2hsv(cmap.reshape(1, -1, 3))
@@ -81,12 +81,12 @@ def lblsave(filename, lbl):
         lbl_pil.save(filename)
 
 
+"""
+根据labelme标注生成的json文件
+用labelme库解析json
+生成分割图片.png格式
+"""
 def convert_to_seg():
-    """
-    根据labelme标注生成的json文件
-    用labelme库解析json
-    生成分割图片.png格式
-    """
     for filename in glob.glob(os.path.join(root_path, "*.json")):
         print("Generating seg_result from:", filename)
 
@@ -107,22 +107,15 @@ def convert_to_seg():
         lblsave(save_seg_file, lbl)
 
 
-def convert_mode():
-    '''
-    直接使用labelme数据转成的分割图像，图像模式默认为’P‘
-    需要将’P‘模式转成’RGB‘模式
-    '''
-    for file_name in glob.glob(os.path.join(save_path, '*.png')):
-        img = PIL.Image.open(file_name)
-        img = img.convert('RGB')
-        img.save(file_name)
-    print('convert mode to "RGB"!')
+def copy_ori_img():
+    for img in glob.glob(os.path.join(root_path, '*.jpg')):
+        shutil.copy(img, save_path)
 
 
 if __name__ == "__main__":
-    root_path = r"C:\Users\1\Desktop\label/"
+    root_path = r"E:\dataset\ZhongChe\diTie\arm\20210114\arm_0114_01\0114_1/"
     save_path = root_path + "Segmentation_result/"
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     convert_to_seg()
-    convert_mode()
+    copy_ori_img()
