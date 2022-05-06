@@ -1,7 +1,7 @@
 #!/usr/bin/env python
+# -*- coding:utf-8 -*-
 
 from __future__ import print_function
-
 import glob
 import os
 import sys
@@ -9,6 +9,7 @@ import numpy as np
 import labelme
 import PIL
 import shutil
+
 """
 根据labelme标注设定的标签名
 获取每个标签名对应的id,包括_background_
@@ -18,9 +19,9 @@ def get_label_name_id():
     """
     根据labelme标注的标签名修改 添加
     """
-    # json_label_name = ['_background_', 'tl']  # 金库铁笼
+    json_label_name = ['_background_', '1']  # 金库铁笼
     # json_label_name =['_background_', 'sdg']  #受电弓倾斜
-    json_label_name = ['_background_', 'arm']
+    # json_label_name = ['_background_', '1', '2', '3']  # 探头异物分割
     # json_label_name =['_background_', 'deformation']
     # json_label_name = ['_background_', 'missing']
     # json_label_name = ['_background_', 'normal']
@@ -30,12 +31,12 @@ def get_label_name_id():
         name_id[name] = ids
     return name_id
 
+
 """
 定义每种标签类别的颜色值：rgb通道
 按照标签名和id顺序依次设定
 """
 def label_colormap(n_label=256, value=None):
-
     def bitget(byteval, idx):
         return (byteval & (1 << idx)) != 0
 
@@ -55,10 +56,10 @@ def label_colormap(n_label=256, value=None):
     """
     自定义分割颜色 背景+标签 多个标签按0,1,2,3...设定
     """
-    cmap[0, :] = [128, 128, 128]  # _background_
-    cmap[1, :] = [214, 0, 0]  # json_label_name  金库铁笼
+    cmap[0, :] = [128, 128, 128]  # _background_  m默认
+    cmap[1, :] = [128, 0, 0]
     # cmap[2, :] = [0, 0, 142]
-    # cmap[3, :] = [0,136,0]
+    # cmap[3, :] = [0, 136, 0]
     # cmap[4, :] = [255,170,0]
     # cmap[5, :] = []
 
@@ -86,6 +87,8 @@ def lblsave(filename, lbl):
 用labelme库解析json
 生成分割图片.png格式
 """
+
+
 def convert_to_seg():
     for filename in glob.glob(os.path.join(root_path, "*.json")):
         print("Generating seg_result from:", filename)
@@ -113,7 +116,7 @@ def copy_ori_img():
 
 
 if __name__ == "__main__":
-    root_path = r"E:\dataset\ZhongChe\diTie\arm\20210114\arm_0114_01\0114_1/"
+    root_path = r"E:\dataset\jcp_data\tantou\20220505\1/"
     save_path = root_path + "Segmentation_result/"
     if not os.path.exists(save_path):
         os.makedirs(save_path)

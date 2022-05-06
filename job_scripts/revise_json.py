@@ -18,7 +18,9 @@ def revise_json(ori_json_file, revise_json_file):
 
     json_data = json.load(ori_file)
     imagePath = json_data["imagePath"]
-    new_imagePath = imagePath.split(".")[0]
+    # new_imagePath = imagePath.split(".")[0]
+    basename = os.path.basename(ori_json_file)
+    new_imagePath = basename.split('.')[0]
     json_data["imagePath"] = new_imagePath + '.jpg'
 
     revise_file.write(json.dumps(json_data))
@@ -33,13 +35,14 @@ def copy_newJson():
 
 
 if __name__ == '__main__':
-    ori_filePath = r'E:\dataset\ZhongChe\sdg_huohua\test/'
-    revise_filePath = r'E:\dataset\ZhongChe\sdg_huohua\test\revise_json/'
+    ori_filePath = r'E:\dataset\jcp_data\tantou\20211208\2/'
+    revise_filePath = r'E:\dataset\jcp_data\tantou\20211208\3/'
     if not os.path.exists(revise_filePath):
         os.makedirs(revise_filePath)
 
     for json_file in glob.glob(os.path.join(ori_filePath, '*.json')):
         ori_json_file = json_file
+        # print(os.path.basename(ori_json_file))
         revise_json_file = revise_filePath + os.path.basename(json_file)
         print(revise_json_file)
         revise_json(ori_json_file, revise_json_file)
