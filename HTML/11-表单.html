@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<h3 style="color: red">文本输入：</h3>
+<from>
+    姓名：<input type="text" name="姓名"><br>
+    证件号：<input type="text" name="证件号"><br>
+    手机号：<input type="text" name="手机号">
+</from>
+
+<h3 style="color: red">密码输入：</h3>
+<from>
+    账号：<input type="text" name="账号"><br>
+    密码：<input type="password" name="密码">
+</from>
+
+<h3 style="color: red">单选：</h3>
+<form>
+    <p>请选择你的性别：</p>
+    <input type="radio" name="性别" value="男">男<br>
+    <input type="radio" name="性别" value="女">女
+</form>
+
+<h3 style="color: red">多选：</h3>
+<form>
+    <p>请选择你喜爱的2-3种水果：</p>
+    <input type="checkbox" name="水果" value="香蕉">香蕉<br>
+    <input type="checkbox" name="水果" value="苹果">苹果<br>
+    <input type="checkbox" name="水果" value="桃子">桃子<br>
+    <input type="checkbox" name="水果" value="菠萝">菠萝
+</form>
+
+<h3 style="color: red">提交按钮：</h3>
+<from name="input" action="html_form_action.php" method="get">
+    新的用户名：<input type="text" name="用户名" >
+    <input type="submit" value="修改">
+</from>
+
+<h3 style="color: red">下拉选项：</h3>
+<from action="">
+    <select name="cars">
+        <option value="小米8">小米8</option>
+        <option value="小米10">小米10</option>
+        <option value="小米11">小米11</option>
+        <option value="小米12">小米12</option>
+    </select>
+</from>
+</body>
+</html>

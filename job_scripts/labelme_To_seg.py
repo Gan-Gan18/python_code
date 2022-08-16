@@ -116,7 +116,7 @@ def copy_ori_img():
 
 
 if __name__ == "__main__":
-    root_path = r"E:\dataset\jcp_data\tantou\20220505\1/"
+    root_path = r"E:\dataset\RMB_data\BaiGuoHuoBi\JiaoDai\label\0815-2/"
     save_path = root_path + "Segmentation_result/"
     if not os.path.exists(save_path):
         os.makedirs(save_path)

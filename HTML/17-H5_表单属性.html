@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单属性</title>
+    <link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+<h3 style="color: red">autocomplete 属性：</h3>
+<p>autocomplete在用户第一次输入后 保存输入值 下次输入时可自动填充上次输入的内容 可选择开启或关闭</p>
+<form autocomplete="on">
+    姓名：<input type="text" name="姓名"><br>
+    电话：<input type="text" name="tel"><br>
+    邮箱：<input type="text" name="email" autocomplete="off">
+    <input type="submit">
+</form>
+
+<h3 style="color: red">form 属性:</h3>
+<p>form用于input输入在表单之外引用指定表单</p>
+<form id="form1">
+    <input type="text" name="姓名"><br>
+    <input type="submit">
+</form>
+<br>
+<input type="text" name="tel" form="form1">
+
+<h3 style="color: red">formtarget 属性:</h3>
+<p>formtarget指定一个名称或关键字来指明表单提交后的展示(这里用于跳转新页面)</p>
+<form>
+    姓名：<input type="text" name="姓名"><br>
+    电话：<input type="text" name="电话"><br>
+    <input type="submit" formtarget="_blank" value="跳转新页面">
+</form>
+
+<h3 style="color: red"> height width 属性(用于图片):</h3>
+<p>height width用于：当提交按钮定义为图片时，需要指定图片高度和宽度</p>
+<form>
+    姓名：<input type="text" name="姓名"><br>
+    电话：<input type="text" name="电话"><br>
+    <input type="image" src="C:\Users\1\Desktop\20220613160347.png" alt="Submit" height="55px" width="88px">
+</form>
+
+<h3 style="color: red"> min和max属性:</h3>
+<p>min、max用于对数字或日期的input值规定范围</p>
+<form>
+    选择2020-01-01之前的日期：<input type="date" name="生日" max="2019-12-31"><br>
+    选择2022-01-01之后的日期：<input type="date" name="生日" min="2022-01-02"><br>
+    选择一个0-9之间的数字：<input type="number" name="数字" min="0" max="9"><br>
+    <input type="submit">
+</form>
+
+<h3 style="color: red"> multiple属性:</h3>
+<p>multiple可选择多个值 适用于email和file标签 可以认为是常用于上传多个文件<br>
+    可用标签：email,file</p>
+<form>
+    上传一张或多张图片：<input type="file" name="图片" multiple>
+    <input type="submit">
+</form>
+
+<h3 style="color: red"> pattern 属性:</h3>
+<p>pattern使用正则表达式参数用于验证输入值是否满足要求 若不满足给出提示<br>
+    可用标签：text, search, url, tel, email, password</p>
+<form>
+    输入密码(只能是6位字母、不含数字和特殊字符)：<br>
+    <input type="password" name="password" pattern="[A-Za-z]{6}" title="只能是6位字母、不含数字和特殊字符!">
+    <input type="submit" value="修改密码">
+</form>
+
+<h3 style="color: red">placeholder 属性:</h3>
+<p>placeholder在用户输入时提供提示信息，显示在输入框内 类似于搜索框中的默认搜索字<br>
+    可用标签：text, search, url, tel, email, password</p>
+<form>
+    输入关键字搜索你感兴趣的新闻：<br>
+    <input type="search" name="keyword" placeholder="佩洛西窜访台湾">
+    <input type="submit" value="搜索">
+</form>
+
+<h3 style="color: red">required 属性:</h3>
+<p>required规定必须在提交之前填写输入（输入框不能为空 否则无法提交）<br></p>
+<form>
+    请输入你的名字：<input type="text" name="name" required><br>
+    请输入你的手机号：<input type="text" name="phone number" maxlength="11" required><br>
+    <input type="submit">
+</form>
+</body>
+</html>

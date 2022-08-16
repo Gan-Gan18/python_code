@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas定义图形-绘制图形</title>
+</head>
+<body>
+<p style="color: red">
+    1.首先用canvas标签定义一个画布容器(矩形)，元素包含（id、width、height），默认无边框<br>
+    2.用js脚本绘制图形<br>
+    3.canvas定义左上角坐标为(0,0)
+</p>
+<canvas id="画布1" width="200" height="100" style="border: 1px solid #000000;"></canvas>
+<script>
+    var c=document.getElementById('画布1');  <!-- 获取上面定义的画布id-->
+    var ctx=c.getContext('2d');  <!-- 创建2d对象 绘制路径、矩形、圆形、字符以及添加图像 -->
+    ctx.fillStyle='#ff0000';  <!-- fillStyle属性定义图形颜色-->
+    ctx.fillRect(0,5,150,75);  <!-- fillRect定义图形坐标和宽高(适用于矩形)-->
+</script>
+<br>
+<canvas id="画布2" width="200" height="100" style="border: 1px solid #000000;"></canvas>
+<script>
+    var c=document.getElementById('画布2');
+    var ctx=c.getContext('2d');
+    ctx.moveTo(0,0);  <!-- 绘制线条的起始坐标点-->
+    ctx.lineTo(200,100);  <!-- 绘制线条的结束坐标点-->
+    ctx.stroke();  <!-- 使用stroke()方法来绘制线条-->
+</script>
+<br>
+<canvas id="画布3" width="200" height="100" style="border: 1px solid #000000;"></canvas>
+<script>
+    var c=document.getElementById('画布3');
+    var ctx=c.getContext('2d');
+    ctx.font='30px Arial';  <!-- font定义文字(大小、字体)-->
+    ctx.fillText('Here!',50,80);  <!-- fillText定义实心文本(文字内容、坐标)-->
+</script>
+<br>
+<img id="image1" src="C:\Users\1\Desktop\20220613160347.png">  <!-- 定义一张图片-->
+<canvas id="画布4" width="200" height="100" style="border: 1px solid #000000;"></canvas>
+<script>
+    var c=document.getElementById('画布4');
+    var ctx=c.getContext('2d');
+    var img=document.getElementById('image1');  <!-- 获取图片-->
+    img.onload=function() {ctx.drawImage(img,10,20);}  <!-- 将图片放置在画布容器中指定坐标点位置-->
+</script>
+</body>
+</html>

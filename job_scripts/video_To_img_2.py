@@ -73,12 +73,12 @@ def video_to_images(video_file, image_save_path=None, prefix_name=None, interval
 
 
 if __name__ == '__main__':
-    video_path = r'E:\dataset\jcp_data\tantou\20220315\videos/'
+    video_path = r'E:\dataset\AR\20220715/'
     files = get_file_list(video_path)
     video_files = files_filter(files, ['mp4', 'MP4', 'mkv'])
     print(video_files)
     for i in tqdm(range(len(video_files))):
-        video_to_images(video_files[i], interval=10)
+        video_to_images(video_files[i], interval=5)
 
     # video_file = r'E:\dataset\jcp_data\tantou\20220309\videos\cam1\192.168.31.194_01_20211126145021273_2.mp4'
     # video_to_images(video_file, interval=10)

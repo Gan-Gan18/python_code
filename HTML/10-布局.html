@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>布局</title>
+</head>
+<body>
+<h3 style="color: red">使用div元素布局：</h3>
+<ul>
+    <li>id="container"---定义一个容器，存放布局内容</li>
+    <li>id="header"---定义网页头部(顶部)内容</li>
+    <li>id="memu"---定义一个菜单栏</li>
+    <li>float: left"---定义内容浮动方向</li>
+    <li>id="content"---定义网页主体内容</li>
+    <li>id="footer"---定义网页页脚</li>
+    <li>clear: both---清除浮动</li>
+</ul>
+<div id="container" style="width: 500px">
+    <div id="header" style="background-color: green">
+       <h1 style="margin-bottom: 0;text-align: center">公司官网</h1>
+    </div>
+    <div id="memu" style="background-color: yellow;height: 200px;width: 100px;float: left">
+        <b>菜单</b><br>公司简介<br>主营业务<br>人才招聘<br>联系我们
+    </div>
+    <div id="content" style="background-color: white;height: 200px;width: 400px;float: left">主页内容<br>1、...<br>2、...</div>
+    <div id="footer" style="background-color: green;clear: both;text-align: center">copyright @ 版权所有</div>
+</div>
+</body>
+</html>

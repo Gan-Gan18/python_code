@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5_视频+音频</title>
+</head>
+<body>
+<h3 style="color: red">添加视频：</h3>
+<p style="color: red">
+    1.video标签可设置视频画面在页面中的宽高大小；<br>
+    2.支持添加多个source元素 每个source元素可指向不同的视频 同时定义视频type 浏览器优先显示第一个可识别的视频
+</p>
+<video width="640" height="360" controls>
+    <source src="E:\dataset\AR\20220628\ori-videos\01\videos\light-A01_02_03_B03-001.mp4" type="video/mp4">
+</video>
+<br>
+<h3 style="color: red">使用脚本添加控件：</h3>
+<div>
+    <button onclick="bfzt()">播放/暂停</button>
+    <button onclick="fd">放大</button>
+    <button onclick="sx">缩小</button>
+    <br>
+    <video  id="video1" width="640">
+        <source src="E:\dataset\AR\20220628\ori-videos\01\videos\light-A01_02_03_B03-001.mp4" type="video/mp4">
+    </video>
+</div>
+<script>
+    var myvideo=document.getElementById('video1');
+    function bfzt()
+    {
+        if (myvideo.paused)
+            myvideo.play();
+        else
+            myvideo.pause();
+    }
+        function fd()
+    {
+        myvideo.width=1280;
+    }
+        function sx()
+    {
+        myvideo.width=320;
+    }
+</script>
+<br>
+<h3 style="color: red">添加音频：</h3>
+<audio controls>
+    <source src="C:\Users\1\Desktop\y1030.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>

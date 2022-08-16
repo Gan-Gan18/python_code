@@ -4,7 +4,7 @@ import os
 import json
 import glob
 
-root_path = r'E:\dataset\jcp_data\test-0321\json'
+root_path = r'E:\dataset\RMB_data\BaiGuo\guohui+code\20220620\test'
 bbox_txt = r'E:\dataset\jcp_data\test-0321\bbox.txt'
 add_info = []
 jsonFile = []

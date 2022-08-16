@@ -1,12 +1,13 @@
 import cv2
 import os
+
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
     import xml.etree.ElementTree as ET
-root_xml = r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu\Annotations/"
-rootDir = r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu\JPEGImages/"
-save_folder=r"E:\dataset\ZhongChe_data\sdg_huohua\voc_20210709_yiwu/result/"
+root_xml = r"E:\dataset\TieKeYan\20220613\label-json\voc-huishou\Annotations/"
+rootDir = r"E:\dataset\TieKeYan\20220613\label-json\voc-huishou\JPEGImages/"
+save_folder = r"E:\dataset\TieKeYan\20220613\label-json\voc-huishou\result/"
 if not os.path.exists(save_folder):
     os.makedirs(save_folder)
 error = []
@@ -20,42 +21,46 @@ error = []
 # label_name = {"none":(0,0,0),"red":(0,0,255),"other":(0,100,98),"blue":(255,0,0),"white":(255,255,255),"black":(0,0,0),"green":(0,255,0)}
 # label_name={"front":(0,255,0),"back":(255,0,0)}
 # label_name = {"1":(0,0,255),"2":(0,255,0)}
-#检测棚
+# 检测棚
 # label_name = {"light":(0,255,0),"flicker":(255,0,0),"dark":(0,0,255)}
 # label_name = {"pole":(0,255,0)}
 # label_name = {"1":(0,255,0)}
 # label_name = {"open":(0,255,0),"close":(255,0,0)}
 # label_name = {"clothes":(0,0,255),"rope":(255,0,0)}
 # label_name = {"head0":(0,0,0),"head1":(255,0,0),"head2":(0,255,255),"clothes0":(0,0,0),"clothes1":(255,0,0),"clothes2":(0,255,255)}
-#moneybag
+# moneybag
 # label_name = {"1":(255,255,255),"2":(255,0,0),"3":(0,0,255),"4":(0,255,255)}
 # label_name = {"moneybag":(255,255,255),"box":(255,0,0)}
 # label_name = {"luggage":(0,0,0),"pack":(0,0,255),"head2":(0,100,98),"clothes0":(255,0,0),"clothes1":(255,255,255),"clothes2":(0,0,0)}
 # label_name = {"arm":(0,255,0)}
-label_name = {"3":(0,255,0)}
+label_name = {"1": (255, 255, 255), "2": (255, 0, 0), "3": (0, 0, 255), "4": (0, 255, 255), "5": (0, 255, 0),
+              '6': (255, 0, 255)}
+
+
 def parse_xml(xml_file):
     tree = ET.parse(root_xml + xml_file)  # <class 'xml.etree.ElementTree.ElementTree'>
     root = tree.getroot()
     bboxes = []
-    color =[]
+    color = []
     for obj in root.findall('object'):
-      bbox = obj.find('bndbox')
-      label = obj.find('name').text
-      #print(label)
-      # if label!="clothes":
-      #     error.append(root_xml + xml_file)
-      #     print(label)
-      #     print(root_xml + xml_file)
-          # print("mmm")
-      bboxes.append((int(bbox.find('xmin').text),
-                     int(bbox.find('ymin').text),
-                     int(bbox.find('xmax').text),
-                     int(bbox.find('ymax').text),
-                     label))
+        bbox = obj.find('bndbox')
+        label = obj.find('name').text
+        # print(label)
+        # if label!="clothes":
+        #     error.append(root_xml + xml_file)
+        #     print(label)
+        #     print(root_xml + xml_file)
+        # print("mmm")
+        bboxes.append((int(bbox.find('xmin').text),
+                       int(bbox.find('ymin').text),
+                       int(bbox.find('xmax').text),
+                       int(bbox.find('ymax').text),
+                       label))
 
     return bboxes
 
-def listDir(rootDir, image_list,endwith):
+
+def listDir(rootDir, image_list, endwith):
     files = os.listdir(rootDir)
     for filename in os.listdir(rootDir):
         pathname = os.path.join(rootDir, filename)
@@ -63,26 +68,23 @@ def listDir(rootDir, image_list,endwith):
             if pathname.split(".")[-1] in [endwith]:
                 image_list.append(pathname)
         else:
-            listDir(pathname, image_list,endwith)
+            listDir(pathname, image_list, endwith)
 
 
 image_list = []
-listDir(rootDir, image_list,"jpg")
-
-
+listDir(rootDir, image_list, "jpg")
 
 for i in range(len(image_list)):
     name_index = int(os.path.basename(image_list[i]).split(".jpg")[0])
 
-
     img = cv2.imread(image_list[i])
-    xml_name = os.path.basename(image_list[i]).split(".jpg")[0]+".xml"
+    xml_name = os.path.basename(image_list[i]).split(".jpg")[0] + ".xml"
 
-    #print(xml_name)
-    xml_names=root_xml + xml_name
+    # print(xml_name)
+    xml_names = root_xml + xml_name
     if os.path.exists(xml_names) is False:
         continue
-    bboxes= parse_xml(xml_name)
+    bboxes = parse_xml(xml_name)
     # for x in error:
     #     if (os.path.exists(x)):
     #         os.remove(x)
@@ -92,13 +94,10 @@ for i in range(len(image_list)):
     for box in bboxes:
         cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), label_name[box[4]], 2)
 
-        name=save_folder+os.path.basename(image_list[i])
-        cv2.putText(img, box[4], (box[2], box[3]), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
-        cv2.imwrite(name,img)
+        name = save_folder + os.path.basename(image_list[i])
+        # cv2.putText(img, box[4], (box[2], box[3]), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 3)
+        cv2.imwrite(name, img)
 
-# cv2.imshow("", img)
-# cv2.waitKey()
+        # cv2.imshow("", img)
+        # cv2.waitKey()
         print(i)
-
-
-

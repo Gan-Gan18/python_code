@@ -12,8 +12,8 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 # 1.json数据路径+voc数据保存路径
-label_json_path = r"E:\dataset\jcp_data\rope_clothes\merge_json/"
-voc_saved_path = r"E:\dataset\jcp_data\rope_clothes\VOC/"
+label_json_path = r"E:\dataset\TieKeYan\20220613\label-json\huishou/"
+voc_saved_path = r"E:\dataset\TieKeYan\20220613\label-json\voc-huishou/"
 
 # 2.创建相关文件夹
 if not os.path.exists(voc_saved_path + "Annotations/"):
@@ -76,7 +76,8 @@ for json_name in files:
         # json_label = ['pole']
         # json_label = ['open','close']
         # json_label = ['head0','head1','head2','clothes0','clothes1','clothes2']
-        json_label = ['clothes', 'rope']
+        # json_label = ['clothes', 'rope']
+        json_label = ['1','2','3','4','5','6']
 
         # 获取json文件中的标注信息（points坐标点+label标签名）
         for multi in json_file["shapes"]:

@@ -106,12 +106,12 @@ class LabelmeJsonParser(object):
 
 
 if __name__ == '__main__':
-    labeled_root = r'E:\dataset\ShenYang_ZhuiYuanQu\Light\20220322'
+    labeled_root = r'E:\dataset\ZhongChe\Packages_images\20220803'
     file_list = []
     for file in glob.glob(os.path.join(labeled_root, "*.json")):
         file_list.append(file)
     for json_file in file_list:
-        image_file = json_file.split('.')[0] + '.bmp'
+        image_file = json_file.split('.')[0] + '.png'
         if not os.path.exists(image_file):
             continue
         parser = LabelmeJsonParser(json_file, image_file, save_images=True)

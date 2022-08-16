@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单元素</title>
+</head>
+<body>
+<h3 style="color: red">datalist元素：</h3>
+<form>
+<p style="color: red">请输入或在下拉选项中选择你最喜欢的水果：</p>
+<input list="水果" name="水果">
+<datalist id="水果">  <!-- <datalist>拥有自动完成功能 当用户在输入框中开始输入时 浏览器会显示填写的选项-->
+    <option value="苹果">
+    <option value="香蕉">
+    <option value="梨">
+    <option value="西瓜">
+    <option value="荔枝">
+</datalist>
+<input type="submit">
+</form>
+
+<h3 style="color: red">output元素：</h3>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+0<input type="range" id="a" value="50">100
++<input type="number" id="b" value="50">
+=<output name="x" for="a b"></output>  <!-- <output>用于不同类型的输出，比如计算值或脚本输出-->
+</form>
+</body>
+</html>

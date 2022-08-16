@@ -1,15 +1,19 @@
 import os
 import shutil
 
-ori_path = r"Y:\Data\ZNJT\ZhongChe_diTie\LabelData\arm\20210114\arm_0114_01/"
-# merge_path = ori_path + 'merge/'
-merge_path = r'Y:\Data\ZNJT\ZhongChe_diTie\LabelData\arm\20210114\arm_0114_01\merge'
+ori_path = r"E:\dataset\AR\ori-videos\02\images/"
+merge_path = r'E:\dataset\AR\ori-videos\02\images\merge'
 if not os.path.exists(merge_path):
     os.makedirs(merge_path)
 file_list = []
 for dirs in os.listdir(ori_path):
-    for file in os.listdir(ori_path + dirs):
-        file_list.append(ori_path + dirs + '/' + file)
-
-for file in file_list:
-    shutil.move(file, merge_path)
+    # for child_dir in os.listdir(ori_path + dirs):
+    #     if child_dir == 'Algtest.log':
+    #         continue
+    #
+    #     for file in os.listdir(os.path.join(ori_path, dirs) + '/' + child_dir):
+    #         if file.endswith('.jpg'):
+    #             file_list.append(os.path.join(ori_path, dirs) + '/' + child_dir + '/' + file)
+    for file_1 in os.listdir(ori_path + dirs):
+        print(file_1)
+        shutil.copy(ori_path+dirs+'/'+file_1, merge_path)
